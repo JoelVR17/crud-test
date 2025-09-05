@@ -22,10 +22,8 @@ export function useAuthError() {
       errorMessage = "An unexpected error occurred";
     }
 
-    // Add context if provided
     const finalMessage = context ? `${context}: ${errorMessage}` : errorMessage;
 
-    // Show toast based on error type
     switch (errorType) {
       case "warning":
         toast.warning(finalMessage, {
@@ -46,7 +44,6 @@ export function useAuthError() {
         });
     }
 
-    // Also log the error for debugging
     console.error("Auth Error:", {
       originalError: error,
       mappedMessage: errorMessage,

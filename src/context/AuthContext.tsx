@@ -9,8 +9,8 @@ import {
   useState,
   useEffect,
 } from "react";
+import { AuthUser } from "@/types/Users";
 
-type AuthUser = { id: string; email: string } | null;
 type AuthSession = unknown | null;
 
 type AuthContextValue = {

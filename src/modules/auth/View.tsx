@@ -18,7 +18,6 @@ export default function AuthView({ mode }: { mode: "login" | "signup" }) {
       setDone(true);
     } else {
       await handleLogin(values);
-      // Login will redirect automatically, no need to set done
     }
   };
 

@@ -25,8 +25,8 @@ export function useAuth() {
         throw new Error(errorMessage);
       }
 
-      const userId = result.data?.user?.id as string | undefined;
-      const email = (result.data?.user?.email as string | undefined) || "";
+      const userId = result.data.data?.user?.id as string | undefined;
+      const email = (result.data.data?.user?.email as string | undefined) || "";
 
       if (userId) {
         try {
@@ -58,7 +58,6 @@ export function useAuth() {
         throw new Error(errorMessage);
       }
 
-      // Access the nested data from Supabase response
       const supabaseData = result.data?.data;
       const userId = supabaseData?.user?.id as string | undefined;
       const email = (supabaseData?.user?.email as string | undefined) || "";
@@ -66,7 +65,6 @@ export function useAuth() {
       setUser(userId ? { id: userId, email } : null);
       setSession(supabaseData?.session || null);
 
-      // Save session to localStorage for persistence
       if (supabaseData?.session?.access_token) {
         localStorage.setItem(
           "sb-access-token",

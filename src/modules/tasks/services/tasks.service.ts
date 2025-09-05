@@ -1,10 +1,12 @@
 import { http } from "@/lib/axios";
+import {
+  CreateTaskPayload,
+  TasksResponse,
+  UpdateTaskPayload,
+} from "@/types/Tasks";
 import axios from "axios";
 
-export type SignUpPayload = { email: string; password: string };
-export type LoginPayload = { email: string; password: string };
-
-class AuthService {
+class TasksService {
   private async handleRequest<T>(
     requestFn: () => Promise<T>
   ): Promise<{ success: boolean; data?: T; error?: string }> {
@@ -13,6 +15,7 @@ class AuthService {
       return { success: true, data };
     } catch (error) {
       if (axios.isAxiosError(error)) {
+        // Error de respuesta del servidor
         if (error.response) {
           const serverError =
             error.response.data?.error || error.response.data?.message;
@@ -23,20 +26,20 @@ class AuthService {
               `Error ${error.response.status}: ${error.response.statusText}`,
           };
         }
-
+        // Network error
         if (error.request) {
           return {
             success: false,
             error: "Connection error. Please check your internet and try again",
           };
         }
-
+        // Configuration error
         return {
           success: false,
           error: error.message || "Configuration error",
         };
       }
-
+      // Error not related to axios
       return {
         success: false,
         error: error instanceof Error ? error.message : "Unknown error",
@@ -44,23 +47,37 @@ class AuthService {
     }
   }
 
-  async signUp(payload: SignUpPayload) {
+  async getTasks(): Promise<TasksResponse> {
+    return this.handleRequest(() => http.get("/tasks").then((res) => res.data));
+  }
+
+  async getTask(id: string) {
     return this.handleRequest(() =>
-      http.post("/auth/signup", payload).then((res) => res.data)
+      http.get(`/tasks/${id}`).then((res) => res.data)
     );
   }
 
-  async login(payload: LoginPayload) {
+  async createTask(payload: CreateTaskPayload) {
     return this.handleRequest(() =>
-      http.post("/auth/login", payload).then((res) => res.data)
+      http.post("/tasks", payload).then((res) => res.data)
     );
   }
 
-  async registerUser(id: string, email: string) {
+  async updateTask(id: string, payload: UpdateTaskPayload) {
     return this.handleRequest(() =>
-      http.post("/users/register", { id, email }).then((res) => res.data)
+      http.put(`/tasks/${id}`, payload).then((res) => res.data)
     );
+  }
+
+  async deleteTask(id: string) {
+    return this.handleRequest(() =>
+      http.delete(`/tasks/${id}`).then((res) => res.data)
+    );
+  }
+
+  async toggleTask(id: string, isCompleted: boolean) {
+    return this.updateTask(id, { isCompleted });
   }
 }
 
-export const authService = new AuthService();
+export const tasksService = new TasksService();

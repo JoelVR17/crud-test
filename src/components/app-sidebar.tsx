@@ -9,6 +9,7 @@ import {
   Command,
   Frame,
   GalleryVerticalEnd,
+  Home,
   Map,
   PieChart,
   Settings2,
@@ -140,6 +141,16 @@ const data = {
   ],
   projects: [
     {
+      name: "Dashboard",
+      url: "/dashboard",
+      icon: Home,
+    },
+    {
+      name: "Tasks",
+      url: "/dashboard/tasks",
+      icon: Check,
+    },
+    {
       name: "Design Engineering",
       url: "#",
       icon: Frame,
@@ -153,11 +164,6 @@ const data = {
       name: "Travel",
       url: "#",
       icon: Map,
-    },
-    {
-      name: "Tasks",
-      url: "/dashboard/tasks",
-      icon: Check,
     },
   ],
 };
