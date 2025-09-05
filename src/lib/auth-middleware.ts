@@ -48,7 +48,6 @@ export async function authenticateRequest(
           data: {
             id: user.id,
             email: user.email || "",
-            password: "",
           },
         });
       } catch (createError) {
