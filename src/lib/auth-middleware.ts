@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 
@@ -42,18 +43,14 @@ export async function authenticateRequest(
     });
 
     if (!dbUser) {
-      console.warn(`User ${user.id} not found in database, creating...`);
-
-      // Create user in database if it doesn't exist
       try {
         await prisma.user.create({
           data: {
             id: user.id,
             email: user.email || "",
-            password: "", // No password needed for Supabase auth
+            password: "",
           },
         });
-        console.log(`User ${user.id} created in database`);
       } catch (createError) {
         console.error("Error creating user in database:", createError);
         return NextResponse.json(

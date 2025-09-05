@@ -21,7 +21,7 @@
 /build
 
 # prisma
-/src/generated/prisma
+/generated/prisma
 
 # misc
 .DS_Store

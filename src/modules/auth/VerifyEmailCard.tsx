@@ -24,7 +24,7 @@ export function VerifyEmailCard({ email }: VerifyEmailCardProps) {
         </div>
         <CardTitle className="text-2xl font-bold">Check your email</CardTitle>
         <CardDescription className="text-base">
-          We've sent a verification link to{" "}
+          We have sent a verification link to{" "}
           <span className="font-semibold text-foreground">{email}</span>
         </CardDescription>
       </CardHeader>
@@ -44,7 +44,7 @@ export function VerifyEmailCard({ email }: VerifyEmailCardProps) {
         </div>
 
         <div className="text-center text-sm text-muted-foreground">
-          <p>Didn't receive the email? Check your spam folder or</p>
+          <p>Did not receive the email? Check your spam folder or</p>
           <Button variant="link" className="p-0 h-auto text-primary-600">
             resend verification email
           </Button>

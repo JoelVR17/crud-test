@@ -14,7 +14,6 @@ export async function GET(request: Request): Promise<NextResponse> {
 
     const token = authHeader.substring(7);
 
-    // Verify the token with Supabase
     const {
       data: { user },
       error,
@@ -30,6 +29,7 @@ export async function GET(request: Request): Promise<NextResponse> {
       email: user.email,
     });
   } catch (error) {
+    console.error("Me error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

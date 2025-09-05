@@ -42,6 +42,7 @@ export function TaskForm({ onSuccess }: TaskFormProps) {
       reset();
       onSuccess?.();
     } catch (error) {
+      console.error("Create task error:", error);
       toast.error(createError?.message || "Failed to create task");
     } finally {
       setIsSubmitting(false);

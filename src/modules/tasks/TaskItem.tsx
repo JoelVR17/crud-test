@@ -67,6 +67,7 @@ export function TaskItem({ task }: TaskItemProps) {
         `Task ${!task.isCompleted ? "completed" : "marked as incomplete"}!`
       );
     } catch (error) {
+      console.error("Toggle task error:", error);
       toast.error(toggleError?.message || "Failed to update task");
     }
   };
@@ -78,6 +79,7 @@ export function TaskItem({ task }: TaskItemProps) {
       toast.success("Task deleted successfully!");
       setIsDeleteDialogOpen(false);
     } catch (error) {
+      console.error("Delete task error:", error);
       toast.error(deleteError?.message || "Failed to delete task");
     } finally {
       setIsDeleting(false);
@@ -91,6 +93,7 @@ export function TaskItem({ task }: TaskItemProps) {
       toast.success("Task updated successfully!");
       setIsEditing(false);
     } catch (error) {
+      console.error("Update task error:", error);
       toast.error(updateError?.message || "Failed to update task");
     } finally {
       setIsSubmitting(false);

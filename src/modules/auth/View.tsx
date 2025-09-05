@@ -39,7 +39,7 @@ export default function AuthView({ mode }: { mode: "login" | "signup" }) {
             </>
           ) : (
             <>
-              Don't have an account?{" "}
+              Do not have an account?{" "}
               <Link className="underline" href="/signup">
                 Create account
               </Link>
